@@ -75408,7 +75408,7 @@ var Automobil = /*#__PURE__*/function (_Component) {
         href: "".concat(_konstante__WEBPACK_IMPORTED_MODULE_4__["BASE_DOMAIN"], "/automobili/").concat(this.state.automobil.id_automobil),
         role: "button"
       }, "Pogledaj") : this.modalForma()))), this.state.stranica ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-        className: "col"
+        className: "col spustiti"
       }, this.state.rezervacije.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_RezervacijaChart__WEBPACK_IMPORTED_MODULE_8__["default"], {
         key: this.props.automobilId,
         rezervacije: this.state.rezervacije
@@ -75417,8 +75417,8 @@ var Automobil = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         className: "QrKod"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
-        src: "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=".concat(_konstante__WEBPACK_IMPORTED_MODULE_4__["BASE_DOMAIN"], "/automobili/").concat(this.state.automobilId)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h4", null, "QR Kod stranice automobila")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", {
+        src: "https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=".concat(_konstante__WEBPACK_IMPORTED_MODULE_4__["BASE_DOMAIN"], "/automobili/").concat(this.props.automobilId)
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", {
         className: "p-2"
       }, "QR Kod stranice automobila Vam pomaze da sadrzaj ove stranice prebacite na mobilni telefon, tako sto cete skenirati kod aplikacijom za skeniranje QR koda. Kada skenirate kod, pokazite stranicu automobila ovlascenom licu na parkingu, a nakon toga ovlasceno lice ce u Vase ime rezervisati automobil."))) : ''];
     }
@@ -75525,7 +75525,7 @@ var Parking = /*#__PURE__*/function (_Component) {
         "class": "btn btn-primary",
         href: "".concat(_konstante__WEBPACK_IMPORTED_MODULE_2__["BASE_DOMAIN"], "/parkinzi/").concat(this.state.parking.id_parking),
         role: "button"
-      })));
+      }, "Pogledaj")));
     }
   }, {
     key: "render",
@@ -75686,9 +75686,6 @@ var RezervacijeChart = /*#__PURE__*/function (_Component) {
       rezervacije: _this.props.rezervacije,
       podaci: []
     };
-
-    _this.srediPodatke();
-
     return _this;
   }
 
@@ -75706,11 +75703,12 @@ var RezervacijeChart = /*#__PURE__*/function (_Component) {
         width: '100%',
         height: 100,
         chartType: "Timeline",
-        loader: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading Chart"),
+        loader: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Ucitavanje podataka..."),
         data: this.srediPodatke(),
         options: {
           timeline: {
-            groupByRowLabel: true
+            groupByRowLabel: true,
+            singleColor: '#fca311'
           }
         }
       });
@@ -75925,6 +75923,270 @@ var AutomobilAdmin = /*#__PURE__*/function (_Component) {
 
   return AutomobilAdmin;
 }(react__WEBPACK_IMPORTED_MODULE_2__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Reusable/forme/AutomobilCreateForma.js":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/Reusable/forme/AutomobilCreateForma.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AutomobilCreateForma; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _konstante__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../konstante */ "./resources/js/components/konstante/index.js");
+/* harmony import */ var _konstante__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_konstante__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _ModelCreateForma__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ModelCreateForma */ "./resources/js/components/Reusable/forme/ModelCreateForma.js");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_6__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+
+
+var AutomobilCreateForma = /*#__PURE__*/function (_Component) {
+  _inherits(AutomobilCreateForma, _Component);
+
+  var _super = _createSuper(AutomobilCreateForma);
+
+  function AutomobilCreateForma(props) {
+    var _this;
+
+    _classCallCheck(this, AutomobilCreateForma);
+
+    _this = _super.call(this, props);
+    _this.state = _defineProperty({
+      automobil: {
+        model: {},
+        parking: {}
+      },
+      modeli: [],
+      parkinzi: [],
+      datum_od: null
+    }, "datum_od", null);
+    return _this;
+  }
+
+  _createClass(AutomobilCreateForma, [{
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState({
+        automobil: _objectSpread(_objectSpread({}, this.state.automobil), {}, _defineProperty({}, e.target.name, e.target.value))
+      });
+    }
+  }, {
+    key: "handleChangeSelect",
+    value: function handleChangeSelect(selectedOption) {
+      var _this$setState;
+
+      this.setState((_this$setState = {}, _defineProperty(_this$setState, selectedOption.type, selectedOption.data), _defineProperty(_this$setState, "automobil", _objectSpread(_objectSpread({}, this.state.automobil), {}, _defineProperty({}, selectedOption.type, selectedOption.data))), _this$setState));
+    }
+  }, {
+    key: "dodaj",
+    value: function dodaj() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(_konstante__WEBPACK_IMPORTED_MODULE_3__["BASE_URL"] + '/automobili/', {
+        id_model: this.state.automobil.model.id_model,
+        id_parking: this.state.automobil.parking.id_parking,
+        registracija: this.state.automobil.registracija,
+        cena_na_dan: this.state.automobil.cena_na_dan
+      }).then(function (res) {
+        alert(res.data.poruka);
+      })["catch"](function (error) {
+        alert(error.response.data.poruka);
+      });
+    }
+  }, {
+    key: "getModeli",
+    value: function getModeli() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(_konstante__WEBPACK_IMPORTED_MODULE_3__["BASE_URL"] + '/modeli').then(function (res) {
+        _this2.setState({
+          modeli: res.data.modeli
+        });
+      });
+    }
+  }, {
+    key: "getParkinzi",
+    value: function getParkinzi() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(_konstante__WEBPACK_IMPORTED_MODULE_3__["BASE_URL"] + '/parkinzi').then(function (res) {
+        _this3.setState({
+          parkinzi: res.data.parkinzi
+        });
+      });
+    }
+  }, {
+    key: "selektOpcijeModel",
+    value: function selektOpcijeModel() {
+      return this.state.modeli.map(function (model) {
+        return {
+          value: model.id_model,
+          label: model.marka + model.model,
+          slika: model.slika,
+          type: 'model',
+          data: model
+        };
+      });
+    }
+  }, {
+    key: "selektOpcijeParking",
+    value: function selektOpcijeParking() {
+      return this.state.parkinzi.map(function (parking) {
+        return {
+          value: parking.id_parking,
+          label: parking.naziv,
+          type: 'parking',
+          data: parking
+        };
+      });
+    }
+  }, {
+    key: "ispisiFormu",
+    value: function ispisiFormu() {
+      var _this4 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this4.getModeli();
+
+          _this4.getParkinzi();
+        },
+        type: "button",
+        "class": "btn btn-success automobilCreateButton",
+        "data-toggle": "modal",
+        "data-target": "#automobil_create"
+      }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        "class": "modal fade",
+        id: 'automobil_create',
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "exampleModalLabel",
+        "aria-hidden": "true"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        "class": "modal-dialog",
+        role: "document"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        "class": "modal-content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        "class": "modal-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+        "class": "modal-title",
+        id: "exampleModalLongTitle"
+      }, "Dodavanje automobila"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "button",
+        "class": "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        "class": "modal-body"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        "for": "registracija"
+      }, "Registracija"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        name: "registracija",
+        onChange: this.handleChange.bind(this),
+        className: "form-control",
+        type: "text",
+        maxLength: 6,
+        minLength: 6
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        "for": "cena_na_dan"
+      }, "Cena Na Dan"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        name: "cena_na_dan",
+        onChange: this.handleChange.bind(this),
+        className: "form-control",
+        type: "text"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        "for": "model"
+      }, "Model"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        name: "id_model",
+        onChange: this.handleChangeSelect.bind(this),
+        className: "form-control",
+        options: this.selektOpcijeModel() || []
+      }), this.state.model ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        "class": "card-img-top",
+        height: "300px",
+        width: "300px",
+        src: _konstante__WEBPACK_IMPORTED_MODULE_3__["STORAGE"] + this.state.model.slika,
+        alt: _konstante__WEBPACK_IMPORTED_MODULE_3__["STORAGE"] + this.state.model.slika
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        "class": "card-img-top",
+        src: _konstante__WEBPACK_IMPORTED_MODULE_3__["STORAGE"] + 'placeholder.jpg',
+        alt: _konstante__WEBPACK_IMPORTED_MODULE_3__["STORAGE"] + 'placeholder.jpg'
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        "for": "parking"
+      }, "Parking"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        key: 'create_form' + 'parkinzi_select',
+        name: "id_parking",
+        onChange: this.handleChangeSelect.bind(this),
+        className: "form-control",
+        options: this.selektOpcijeParking() || []
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        "class": "modal-footer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "button",
+        "class": "btn btn-secondary",
+        "data-dismiss": "modal"
+      }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "button",
+        "class": "btn btn-primary",
+        onClick: this.dodaj.bind(this)
+      }, "Dodaj"))))));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return this.ispisiFormu();
+    }
+  }]);
+
+  return AutomobilCreateForma;
+}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
 
 
@@ -76298,8 +76560,6 @@ var AutomobilUpdateForma = /*#__PURE__*/function (_Component) {
         onChange: this.handleChange.bind(this),
         className: "form-control",
         type: "text",
-        maxLength: 6,
-        minLength: 6,
         value: this.state.automobil.cena_na_dan
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
         "for": "model"
@@ -76340,7 +76600,6 @@ var AutomobilUpdateForma = /*#__PURE__*/function (_Component) {
         "class": "btn btn-primary",
         onClick: this.izmena.bind(this)
       }, "Izmena"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_ModelCreateForma__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        closeModal: this.state.closeModal,
         key: this.state.automobil.id_automobil,
         automobilId: this.state.automobil.id_automobil
       }))))));
@@ -76458,10 +76717,10 @@ var ModelCreateForma = /*#__PURE__*/function (_Component) {
         type: "button",
         "class": "btn btn-success",
         "data-toggle": "modal",
-        "data-target": "#test" + this.props.automobilId
+        "data-target": "#modelCreate" + this.props.automobilId
       }, "Kreiraj novi model"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         "class": "modal fade",
-        id: "test" + this.props.automobilId,
+        id: "modelCreate" + this.props.automobilId,
         tabindex: "-1",
         role: "dialog",
         "aria-labelledby": "exampleModalLabel",
@@ -76725,6 +76984,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _konstante__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../konstante */ "./resources/js/components/konstante/index.js");
 /* harmony import */ var _konstante__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_konstante__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _Reusable_admin_AutomobilAdmin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Reusable/admin/AutomobilAdmin */ "./resources/js/components/Reusable/admin/AutomobilAdmin.js");
+/* harmony import */ var _Reusable_forme_AutomobilCreateForma__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Reusable/forme/AutomobilCreateForma */ "./resources/js/components/Reusable/forme/AutomobilCreateForma.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -76746,6 +77006,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -76792,7 +77053,7 @@ var AutomobiliAdmin = /*#__PURE__*/function (_Component) {
     value: function strelicePaginacija() {
       var _this3 = this;
 
-      return [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "d-flex justify-content-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
         type: "button",
@@ -76808,14 +77069,14 @@ var AutomobiliAdmin = /*#__PURE__*/function (_Component) {
           return _this3.getAutomobili(_this3.state.nextUrl);
         },
         "class": "btn btn-primary btn-lg"
-      }, '>'))];
+      }, '>'));
     }
   }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, {
         key: 'admin-react-fragment'
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Reusable_forme_AutomobilCreateForma__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row"
       }, this.state.automobili.map(function (a) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Reusable_admin_AutomobilAdmin__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -76913,13 +77174,7 @@ var Automobili = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      if (this.state.parking) axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url || _konstante__WEBPACK_IMPORTED_MODULE_3__["BASE_URL"] + '/automobili/').then(function (res) {
-        _this2.setState({
-          automobili: res.data.automobili.data,
-          prevUrl: res.data.automobili.prev_page_url,
-          nextUrl: res.data.automobili.next_page_url
-        });
-      });else axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url || _konstante__WEBPACK_IMPORTED_MODULE_3__["BASE_URL"] + '/automobili?parkingId=' + this.state.parkingId).then(function (res) {
+      if (this.state.parkingId) axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url || _konstante__WEBPACK_IMPORTED_MODULE_3__["BASE_URL"] + '/automobili?parkingId=' + this.state.parkingId).then(function (res) {
         _this2.setState({
           automobili: res.data.automobili.data,
           prevUrl: res.data.automobili.prev_page_url,

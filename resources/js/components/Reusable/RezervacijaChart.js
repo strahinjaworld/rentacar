@@ -31,7 +31,11 @@ export default class RezervacijeChart extends Component {
                 loader={<div>Ucitavanje podataka...</div>}
                 data={this.srediPodatke()}
                 options={{
-                    timeline: { groupByRowLabel: true },
+                    timeline: {
+                        groupByRowLabel: true,
+                        singleColor: '#fca311'
+                    },
+
                 }}
             />
         )

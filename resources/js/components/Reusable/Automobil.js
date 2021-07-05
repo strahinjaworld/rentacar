@@ -65,12 +65,11 @@ export default class Automobil extends Component {
             </div>,
 
             this.state.stranica ?
-                <div className='col'>
+                <div className='col spustiti'>
                     {this.state.rezervacije.length ? <RezervacijeChart key={this.props.automobilId} rezervacije={this.state.rezervacije} /> : 'Nije rezervisan'}
                     <div className='d-flex'>
                         <div className='QrKod'>
-                            <img src={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${BASE_DOMAIN}/automobili/${this.props.automobilId}`}></img>
-                            <h4>QR Kod stranice automobila</h4>
+                            <img src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${BASE_DOMAIN}/automobili/${this.props.automobilId}`}></img>
                         </div>
                         <p className='p-2'>QR Kod stranice automobila Vam pomaze da sadrzaj ove stranice prebacite na mobilni telefon, tako sto cete skenirati kod aplikacijom za skeniranje QR koda. Kada skenirate kod, pokazite stranicu automobila ovlascenom licu na parkingu, a nakon toga ovlasceno lice ce u Vase ime rezervisati automobil.</p>
                     </div>

@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { BASE_URL } from "../../konstante";
 import AutomobilAdmin from "../../Reusable/admin/AutomobilAdmin"
+import AutomobiliCreateForma from "../../Reusable/forme/AutomobilCreateForma"
 export default class AutomobiliAdmin extends Component {
     constructor(props) {
         super(props);
@@ -16,13 +17,13 @@ export default class AutomobiliAdmin extends Component {
 
 
     getAutomobili(url = null) {
-            Axios.get(url || (BASE_URL + '/automobili/')).then(res => {
-                this.setState({
-                    automobili: res.data.automobili.data,
-                    prevUrl: res.data.automobili.prev_page_url,
-                    nextUrl: res.data.automobili.next_page_url
-                });
+        Axios.get(url || (BASE_URL + '/automobili/')).then(res => {
+            this.setState({
+                automobili: res.data.automobili.data,
+                prevUrl: res.data.automobili.prev_page_url,
+                nextUrl: res.data.automobili.next_page_url
             });
+        });
     }
 
     strelicePaginacija() {
@@ -39,6 +40,7 @@ export default class AutomobiliAdmin extends Component {
     render() {
         return (
             <React.Fragment key={'admin-react-fragment'}>
+                {<AutomobiliCreateForma />}
                 <div className='row'>
                     {this.state.automobili.map(a => {
                         return <AutomobilAdmin key={a.id_automobil + 'admin-automobil' + a.id_model} automobil={a} />;
