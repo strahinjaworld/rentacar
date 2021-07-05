@@ -32,17 +32,22 @@ class AutomobilController extends Controller
             'id_model' => 'required',
             'id_parking' => 'required',
             'cena_na_dan' => 'required',
-            'registracija' => 'required',
+            'registracija' => "required|unique:automobil",
         ]);
 
-        Automobil::create(
+        $automobil = Automobil::create(
             [
                 'id_model' => $request->id_model,
                 'id_parking' => $request->id_parking,
-                'cena_na_dan' => $request->id_cena_na_dan,
-                'registracija' => $request->id_registracija,
+                'cena_na_dan' => $request->cena_na_dan,
+                'registracija' => $request->registracija,
             ]
         );
+
+        if ($automobil) {
+            return response()->json(['poruka' => 'Uspesno ste dodali automobil!'], 200);
+        }
+        return response()->json(['poruka' => 'Greska!'], 400);
     }
 
     public function update(Request $request, Automobil $automobil)

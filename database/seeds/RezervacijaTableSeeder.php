@@ -15,7 +15,7 @@ class RezervacijaTableSeeder extends Seeder
     public function run()
     {
         for ($i = 0; $i < 50; $i++) {
-            $datumOd = Carbon::today()->addDays(rand(1, 150));
+            $datumOd = Carbon::today()->addDays(rand(1, 40));
             $datumDo = $datumOd->copy()->addDays(rand(2, 8));
             $id_automobil = rand(1, 20);
             if (Automobil::find($id_automobil)->rezervisan($datumOd, $datumDo)) echo $i;

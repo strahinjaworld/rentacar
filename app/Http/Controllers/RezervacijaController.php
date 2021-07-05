@@ -36,19 +36,19 @@ class RezervacijaController extends Controller
         $validated = $request->validate([
             'id_automobil' => 'required',
             'datum_od' => 'required',
-            'datum_do' => 'required',
+            'datum_do' => 'required'
         ]);
         $automobil = Automobil::find($request->id_automobil);
+        $user = auth('api')->user();
         if (!$automobil->rezervisan($request->datum_od, $request->datum_do)) {
             Rezervacija::create(
                 [
                     'id_automobil' => $request->id_automobil,
                     'datum_od' => $request->datum_od,
                     'datum_do' => $request->datum_do,
-                    'id_user' => Auth::id()
+                    'id_user' => $user->id
                 ]
             );
-
             $cenaRezervacije = Carbon::parse($request->datum_od)
                 ->diff(Carbon::parse($request->datum_do))
                 ->days * $automobil->cena_na_dan;
