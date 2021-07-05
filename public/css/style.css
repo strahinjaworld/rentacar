@@ -1,0 +1,48 @@
+/* 000000-14213d-fca311-e5e5e5-ffffff */
+
+:root {
+    --crna: #000;
+    --bela: #ffffff;
+    --plava: #14213d;
+    --zuta: #fca311;
+    --siva: #e5e5e5;
+  }
+
+.automobilCreateButton{
+    border-radius: 20px;
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    position:fixed !important;
+    z-index: 999999999999 !important;
+    right: 20px;
+    bottom: 20px;
+
+}
+
+body{
+    background-color: var(--plava);
+}
+.container:not(.container-nav){
+    background-color: var(--siva);
+    height: 100%;
+    padding: 20px;
+}
+.btn-primary{
+    background-color: var(--zuta);
+    color: var(--plava);
+}
+
+.spustiti{
+    margin-top: 150px;
+}
+.btn-primary:hover{
+    background-color: var(--plava);
+    color: var(--zuta);
+}
+.navbar, .container-nav {
+    background-color: var(--zuta) !important;
+    color: var(--plava) !important;
+    font-weight: bolder;
+}
+
